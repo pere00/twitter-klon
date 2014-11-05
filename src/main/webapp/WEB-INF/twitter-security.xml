@@ -15,9 +15,9 @@
 		<form-login default-target-url="/welcome" />
 		<logout logout-success-url="/"/>
 	</http>
-
-	<authentication-manager>
+<authentication-manager>
 		<authentication-provider>
+		    <password-encoder ref="encoder" />
 			<jdbc-user-service data-source-ref="dataSource"
 			     users-by-username-query="select nickname username, password, true enabled from USER where nickname = ?"
 			     authorities-by-username-query="select u.nickname username, ur.authority
@@ -26,5 +26,8 @@
 			/>
 		</authentication-provider>
 	</authentication-manager>
-
+<beans:bean id="encoder" 
+	class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+	<beans:constructor-arg name="strength" value="11" />
+  </beans:bean>
 </beans:beans>

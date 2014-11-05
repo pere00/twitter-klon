@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import org.oi.twitter.crypt.BCryptutil;
 
 @Repository
 public class UserDao {
@@ -64,11 +65,13 @@ public class UserDao {
     }
     
     public void saveNewUser(final User user) {
+        String pwd = user.getPassword();
+        final String computed_hash = BCryptutil.hashPassword(pwd);
         Number newId = jdbcInsert.executeAndReturnKey(new HashMap<String, Object>() {{
                                                             put("nickname", user.getNickname());
                                                             put("firstname", user.getFirstname());
                                                             put("lastname", user.getLastname());
-                                                            put("password", user.getPassword());
+                                                            put("password", computed_hash);
                                                             put("email", user.getEmail());
                                                             put("update_by_email", user.getUpdateByEmail());
                                                             put("user_pic", user.getUserPic());

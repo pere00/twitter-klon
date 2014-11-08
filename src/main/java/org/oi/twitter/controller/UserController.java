@@ -57,6 +57,15 @@ public class UserController {
             return "editUser";
         }
         
+        if (!userService.checkIfpassAtLeast6char(user.getPassword())) {
+            bindingResult.reject(null, "Password has to be at least 6 characters");
+            return "editUser";
+        }
+        if (!userService.checkIfPassIsHard(user.getPassword())) {
+            bindingResult.reject(null, "Password must contain one small letter, one capital letter, and one number or special character");
+            return "editUser";
+        }
+        
         user.setUserPic("default.jpg");
         userService.saveUser(user);
         

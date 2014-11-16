@@ -39,19 +39,12 @@
 	                            <td><sf:input path="email" size="20" id="user_email" /></td>
 	                        </tr>
 	                        <tr>
-	                            <th></th>
-	                            <td>
-	                                <sf:checkbox path="updateByEmail" id="user_send_mail_updates" />
-	                                <label for="user_send_mail_updates">Send me mail updates!</label>
-	                            </td>
-	                        </tr>
-	                        <tr>
-	                           <th><label for="image">Profile image:</label></th>
+	                           <th><label for="image">Profile image: (max. 500 kb, jpg format)</label></th>
 	                           <td><input name="image" type="file" /></td>
 	                        </tr>
 	                        <tr><th></th></tr>
 	                        <tr>
-	                            <td><input name="commit" type="submit" value="I accept. Create my account." /></td>
+	                            <td><input name="commit" type="submit" value="Create my account." /></td>
 	                        </tr>                        
 	                        <tr>
 	                        <th></th>

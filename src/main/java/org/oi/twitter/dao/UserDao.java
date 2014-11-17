@@ -74,7 +74,7 @@ public class UserDao {
                                                             put("lastname", user.getLastname());
                                                             put("password", passwordEncoder.encode(user.getPassword()));
                                                             put("email", user.getEmail());
-                                                            put("update_by_email", user.getUpdateByEmail());
+                                                            put("update_by_email", 0);
                                                             put("user_pic", user.getUserPic());
                                                        }});
         user.setId(newId.longValue());
@@ -85,7 +85,7 @@ public class UserDao {
     }
 
     public void updateUser(User user) {
-        jdbcTemplate.update(SQL_UPDATE_USER, user.getFirstname(), user.getLastname(), user.getPassword(), user.getEmail(), user.getUpdateByEmail(), user.getUserPic(), user.getId());
+        jdbcTemplate.update(SQL_UPDATE_USER, user.getFirstname(), user.getLastname(), user.getPassword(), user.getEmail(), 0, user.getUserPic(), user.getId());
     }
 
     public UserInfo fetchUserInfo(String username, String authenticatedUserName) {

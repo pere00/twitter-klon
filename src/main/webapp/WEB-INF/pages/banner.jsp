@@ -10,6 +10,7 @@
 	        Hello <sec:authentication property="principal.username" />!
 	        <a href="<s:url value="/user/all" />">Users</a>
 	        <a href="<s:url value="/tweet/timeline" />">Timeline</a>
+	        <a href="<s:url value="/welcome" />">Main</a>
 	        <a href="<s:url value="/j_spring_security_logout" />">Logout</a>
 	    </div>
 	    <div id="tweetArea">

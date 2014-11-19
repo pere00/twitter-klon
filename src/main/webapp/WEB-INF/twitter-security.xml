@@ -5,29 +5,30 @@
 						http://www.springframework.org/schema/security
 						http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
-    <http pattern="/resources/**" security="none" />
+	<http pattern="/resources/**" security="none" />
 
 	<http use-expressions="true" auto-config="true">
-	    <intercept-url pattern="/welcome*" access="isAnonymous() or hasRole('ROLE_USER')"/>
-	    <intercept-url pattern="/user/new" access="isAnonymous()"/>
-	    <intercept-url pattern="/" access="isAnonymous() or hasRole('ROLE_USER')"/>
+		<intercept-url pattern="/welcome*"
+			access="isAnonymous() or hasRole('ROLE_USER')" />
+		<intercept-url pattern="/user/new" access="isAnonymous()" />
+		<intercept-url pattern="/"
+			access="isAnonymous() or hasRole('ROLE_USER')" />
 		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
 		<form-login default-target-url="/welcome" />
-		<logout logout-success-url="/"/>
+		<logout logout-success-url="/" />
 	</http>
-<authentication-manager>
+	<authentication-manager>
 		<authentication-provider>
-		    <password-encoder ref="encoder" />
+			<password-encoder ref="encoder" />
 			<jdbc-user-service data-source-ref="dataSource"
-			     users-by-username-query="select nickname username, password, true enabled from USER where nickname = ?"
-			     authorities-by-username-query="select u.nickname username, ur.authority
+				users-by-username-query="select nickname username, password, true enabled from USER where nickname = ?"
+				authorities-by-username-query="select u.nickname username, ur.authority
 												from USER u JOIN USER_ROLES ur ON u.id = ur.user_id
-												where u.nickname = ?"
-			/>
+												where u.nickname = ?" />
 		</authentication-provider>
 	</authentication-manager>
-<beans:bean id="encoder" 
-	class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
-	<beans:constructor-arg name="strength" value="11" />
-  </beans:bean>
+	<beans:bean id="encoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<beans:constructor-arg name="strength" value="11" />
+	</beans:bean>
 </beans:beans>

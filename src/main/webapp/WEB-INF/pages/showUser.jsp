@@ -13,7 +13,6 @@
 	            First name: ${user.firstname }<br />
 	            Last name: ${user.lastname }<br />
 	            Email: ${user.email }<br />
-	            Update by email: ${user.updateByEmail ? 'Yes' : 'No' }<br />
 	            <jsp:include page="following_manage_form.jsp">
                      <jsp:param name="nickname" value="${user.nickname}"/>
                      <jsp:param name="isFollowing" value="${user.isFollowing}"/>

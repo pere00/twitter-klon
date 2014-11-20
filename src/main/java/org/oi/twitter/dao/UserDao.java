@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserDao {
     private JdbcTemplate jdbcTemplate;
+	final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     private SimpleJdbcInsert jdbcInsert;
     private static final String SQL_FETCH_USER_BY_ID = "SELECT * FROM `USER` WHERE ID = ?";
     private static final String SQL_FETCH_USER_BY_NAME = "SELECT * FROM `USER` WHERE NICKNAME = ?";
@@ -65,7 +66,6 @@ public class UserDao {
     }
     
     public void saveNewUser(final User user) {
-    	final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         Number newId = jdbcInsert.executeAndReturnKey(new HashMap<String, Object>() {{
                                                             put("nickname", user.getNickname());
@@ -84,7 +84,7 @@ public class UserDao {
     }
 
     public void updateUser(User user) {
-        jdbcTemplate.update(SQL_UPDATE_USER, user.getFirstname(), user.getLastname(), user.getPassword(), user.getEmail(), 0, user.getUserPic(), user.getId());
+        jdbcTemplate.update(SQL_UPDATE_USER, user.getFirstname(), user.getLastname(), passwordEncoder.encode(user.getPassword()), user.getEmail(), 0, user.getUserPic(), user.getId());
     }
 
     public UserInfo fetchUserInfo(String username, String authenticatedUserName) {

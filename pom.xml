@@ -144,10 +144,10 @@
 				<version>6.1.26</version>
 				<configuration>
 					<connectors>
-						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+						<!-- <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
 							<port>8080</port>
 							<maxIdleTime>60000</maxIdleTime>
-						</connector>
+						</connector> -->
 						<connector implementation="org.mortbay.jetty.security.SslSocketConnector">
 							<port>8443</port>
 							<maxIdleTime>60000</maxIdleTime>
